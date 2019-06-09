@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    run: webapp
+  name: webapp
+  namespace: web
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      run: webapp
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        run: webapp
+    spec:
+      containers:
+      - image: linuxacademycontent/podofminerva:latest
+        name: webapp
+        ports:
+        - containerPort: 80
+        resources: {}
+status: {}
