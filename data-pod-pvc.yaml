@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: data-prod
+  name: data-prod
+  namespace: web
+spec:
+  volumes:
+     - name: temp-data
+       persistentVolumeClaim:
+         claimName: data-pvc
+  containers:
+  - args:
+    - /bin/sh
+    - -c
+    - sleep 3600
+    image: busybox
+    name: data-prod
+    volumemounts:
+      - name: temp-data
+        mountpath: /tmp/data
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Never
+status: {}
